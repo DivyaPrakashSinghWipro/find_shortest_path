@@ -35,7 +35,7 @@ public class GetPath {
      
     
 }
-
+//class to store the data from the txt file into a graph datastructure.
 class StoreData{
     
     
@@ -84,6 +84,7 @@ class StoreData{
                     
         }
     }
+    //funtion which joins the any two given graph row wise
     Node joinTheRows(Node a,Node combo){
         if(combo==null){
             return a;
@@ -246,6 +247,7 @@ class StoreData{
        
        
      }
+    //function to travels the graph from the end point to starting point via shortest path
     void reverse(Node h,Node ee){
         try{
         if(ee.right.stat=='S'){
@@ -300,6 +302,7 @@ class StoreData{
         reverse(h,gg);
 }
 }
+//Node used in graph
 class Node{
     char stat;
     Node up,down,left,right;
