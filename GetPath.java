@@ -12,7 +12,6 @@ package getpath;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 public class GetPath {
 
     /**
@@ -25,9 +24,16 @@ public class GetPath {
         System.out.println("Enter the path of the input file");
         String path=scan.nextLine();
         sd.storeTheData(path);
+        try{
         sd.start.num=1;
         sd.recur(sd.combo,sd.start);
         sd.reverse(sd.combo, sd.end);
+        }
+        catch(StackOverflowError  e){
+        if(e.getMessage()==null){
+            System.out.println("no path exists between S and E");
+        }
+    }
           
     }
     
@@ -168,7 +174,9 @@ class StoreData{
     }
     
    
-    //recursion function used to get the shortest path
+    //function used to get the shortest path
+    
+    
     void recur(Node h,Node a){
    
        
