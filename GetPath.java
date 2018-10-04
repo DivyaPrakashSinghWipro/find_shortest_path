@@ -9,7 +9,7 @@ package getpath;
  *
  * @author DI20024020
  */
-import java.util.Scanner;
+import java.util.*;
 import java.io.File;
 import java.io.FileInputStream;
 public class GetPath {
@@ -24,10 +24,12 @@ public class GetPath {
         System.out.println("Enter the path of the input file");
         String path=scan.nextLine();
         sd.storeTheData(path);
+        Queue<Node> q=new LinkedList<>();
         try{
         sd.start.num=1;
-        sd.recur(sd.combo,sd.start);
-        sd.reverse(sd.combo, sd.end);
+        q.add(sd.start);
+        sd.recur(sd.combo,q);
+       // sd.reverse(sd.combo, sd.end);
         }
         catch(StackOverflowError  e){
         if(e.getMessage()==null){
@@ -173,102 +175,63 @@ class StoreData{
             System.out.println(c.stat);
     }
     
-   
+  
     //function used to get the shortest path
     
     
-    void recur(Node h,Node a){
-   
+    void recur(Node h,Queue q){
+       Node f=(Node)q.remove();
+       if(f.right!=null){
+           if(f.right.stat=='E'){
+               f.right.num=f.num+1;
+               reverse(h,f.right);
+           }
+           else if(f.right.stat!='W' && f.right.stat!='S' && f.right.stat!='"' ){
+               f.right.stat='"';
+               f.right.num=f.num+1;
+               q.add(f.right);
+           }
+       }
+       if(f.left!=null){
+           if(f.left.stat=='E'){
+               f.left.num=f.num+1;
+               reverse(h,f.left);
+           }
+           else if(f.left.stat!='W' && f.left.stat!='S' && f.left.stat!='"' ){
+               f.left.stat='"';
+               f.left.num=f.num+1;
+               q.add(f.left);
+           }
+       }
+       if(f.up!=null){
+           if(f.up.stat=='E'){
+               f.up.num=f.num+1;
+               reverse(h,f.up);
+           }
+           else if(f.up.stat!='W' && f.up.stat!='S' && f.up.stat!='"' ){
+               f.up.stat='"';
+               f.up.num=f.num+1;
+               q.add(f.up);
+           }
+       }
+       if(f.down!=null){
+           if(f.down.stat=='E'){
+               f.down.num=f.num+1;
+               reverse(h,f.down);
+           }
+           else if(f.down.stat!='W' && f.down.stat!='S' && f.down.stat!='"' ){
+               f.down.stat='"';
+               f.down.num=f.num+1;
+               q.add(f.down);
+           }
+       }
        
-        if(a.right!=null && a.right.stat=='E'){
-            a.right.num=a.num+1; return;
-        }
-        else if(a.left!=null && a.left.stat=='E')
-        {a.left.num=a.num+1; return;}
-        else if(a.up!=null && a.up.stat=='E')
-            {a.up.num=a.num+1; return;}
-        else if(a.down!=null && a.down.stat=='E'){
-            a.down.num=a.num+1; return;
-        }
+       recur(h,q);
         
-       if(a.right!=null && a.right.stat!='W' && a.right.stat!='S'){
-           if(a.right.stat=='.'){
-               a.right.stat='"';
-               a.right.num=a.num+1;
-           }
-           if(a.right.num-a.num>1){
-               a.right.num=a.num+1;
-           }
-
-       }
-       if(a.left!=null && a.left.stat!='W' && a.left.stat!='S'){
-           
-           if(a.left.stat=='.'){
-               a.left.stat='"';
-               a.left.num=a.num+1;
-           }
-           if(a.left.num-a.num>1){
-               a.left.num=a.num+1;
-           }
-
-       }
-       if(a.up!=null && a.up.stat!='W' && a.up.stat!='S'){
-           
-           
-           if(a.up.stat=='.'){
-               a.up.stat='"';
-               a.up.num=a.num+1;
-           }
-           if(a.up.num-a.num>1){
-               a.up.num=a.num+1;
-           }
-
-       }
-       if(a.down!=null  && a.down.stat!='W' && a.down.stat!='S'){
-           
-           
-           if(a.down.stat=='.'){
-               a.down.stat='"';
-               a.down.num=a.num+1;
-           }
-           if(a.down.num-a.num>1){
-               a.down.num=a.num+1;
-           }
-
-       }
-       
-       
-       
-       if(a.right!=null && a.right.stat=='"' && a.right.stat!='S' && a.right.num>a.num){
-           
-           recur(h,a.right);
-           
-       }
-       
-       if(a.left!=null && a.left.stat=='"' && a.left.stat!='S' && a.left.num>a.num){
-          
-           recur(h,a.left);
-           
-       }
-       if(a.down!=null && a.down.stat=='"' && a.down.stat!='S' && a.down.num>a.num){
-          
-           recur(h,a.down);
-           
-       }
-       
-       if(a.up!=null && a.up.stat=='"' && a.up.stat!='S' && a.up.num>a.num){
-           
-           recur(h,a.up);
-           
-       }
-       
-       
-       
-       
-       
      }
     //function to travels the graph from the end point to starting point via shortest path
     void reverse(Node h,Node ee){
+       
         try{
         if(ee.right.stat=='S'){
 
