@@ -33,9 +33,12 @@ public class GetPath {
         }
         catch(StackOverflowError  e){
         if(e.getMessage()==null){
-            System.out.println("no path exists between S and E");
+            System.out.println("No path exists between S and E");
         }
     }
+        catch(NoSuchElementException ee){
+             System.out.println("No path exists between S and E");
+        }
           
     }
     
