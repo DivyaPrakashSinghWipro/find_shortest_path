@@ -24,6 +24,10 @@ public class GetPath {
         System.out.println("Enter the path of the input file");
         String path=scan.nextLine();
         sd.storeTheData(path);
+        System.out.println("Input map:");
+        sd.printData(sd.combo);
+        System.out.println("\nOutput map:\n");
+        
         Queue<Node> q=new LinkedList<>();
         try{
         sd.start.num=1;
@@ -189,7 +193,7 @@ class StoreData{
                f.right.num=f.num+1;
                reverse(h,f.right);
            }
-           else if(f.right.stat!='W' && f.right.stat!='S' && f.right.stat!='"' ){
+           else if(f.right.stat!='W' && f.right.stat!='w' && f.right.stat!='S' && f.right.stat!='"' ){
                f.right.stat='"';
                f.right.num=f.num+1;
                q.add(f.right);
@@ -200,7 +204,7 @@ class StoreData{
                f.left.num=f.num+1;
                reverse(h,f.left);
            }
-           else if(f.left.stat!='W' && f.left.stat!='S' && f.left.stat!='"' ){
+           else if(f.left.stat!='W' && f.left.stat!='w' && f.left.stat!='S' && f.left.stat!='"' ){
                f.left.stat='"';
                f.left.num=f.num+1;
                q.add(f.left);
@@ -211,7 +215,7 @@ class StoreData{
                f.up.num=f.num+1;
                reverse(h,f.up);
            }
-           else if(f.up.stat!='W' && f.up.stat!='S' && f.up.stat!='"' ){
+           else if(f.up.stat!='W' && f.up.stat!='w' && f.up.stat!='S' && f.up.stat!='"' ){
                f.up.stat='"';
                f.up.num=f.num+1;
                q.add(f.up);
@@ -222,7 +226,7 @@ class StoreData{
                f.down.num=f.num+1;
                reverse(h,f.down);
            }
-           else if(f.down.stat!='W' && f.down.stat!='S' && f.down.stat!='"' ){
+           else if(f.down.stat!='W' && f.down.stat!='w' && f.down.stat!='S' && f.down.stat!='"' ){
                f.down.stat='"';
                f.down.num=f.num+1;
                q.add(f.down);
