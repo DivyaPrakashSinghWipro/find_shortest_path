@@ -6,3 +6,5 @@ S-starting point
 E-End point
 
 W-wall or obstacles
+
+.-Path one can travel
